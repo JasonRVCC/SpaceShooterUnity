@@ -34,7 +34,10 @@ public class DestroyByContact : MonoBehaviour
 			gameController.GameOver();
 		}
 
-		gameController.AddScore (scoreValue);
+		if (other.tag == "Bolt") 
+		{
+			gameController.AddScore (scoreValue);
+		}
 		Destroy(other.gameObject);
 		Destroy (gameObject); 
 	}

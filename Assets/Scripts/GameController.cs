@@ -9,14 +9,19 @@ public class GameController : MonoBehaviour
 	public float spawnWait;
 	public float startWait;
 	public float waveWait;
+	public int perfectBonus;
 
 	public GUIText scoreText;
 	public GUIText restartText;
 	public GUIText gameOverText;
+	public GUIText perfectText;
 
 	private bool gameOver;
 	private bool restart;
 	private int score;
+	private int hitCount;
+	private Color perfectColor;
+	private Color fadeColor;
 
 	void Start ()
 	{
@@ -24,7 +29,11 @@ public class GameController : MonoBehaviour
 		restart = false;
 		restartText.text = "";
 		gameOverText.text = "";
+		perfectText.text = "";
 		score = 0;
+		hitCount = 0;
+		perfectColor = perfectText.color;
+		fadeColor = perfectColor - new Color(0, 0, 0, 1.0f);
 		UpdateScore ();
 		StartCoroutine (SpawnWaves());
 	}
@@ -56,6 +65,8 @@ public class GameController : MonoBehaviour
 			}
 			yield return new WaitForSeconds(waveWait);
 
+			hitCount = 0;
+
 			if (gameOver)
 			{
 				restartText.text = "Press 'R' for Restart";
@@ -63,6 +74,12 @@ public class GameController : MonoBehaviour
 				break;
 			}
 		}
+	}
+	
+	public int HitCount 
+	{
+		get {return hitCount;}
+		set {hitCount = value;}
 	}
 
 	public void AddScore (int newScoreValue)
@@ -80,5 +97,17 @@ public class GameController : MonoBehaviour
 	{
 		gameOverText.text = "Game Over. You Lose. Deal With It.";
 		gameOver = true;
+	}
+
+	public void PerfectBonusScored ()
+	{
+		AddScore(perfectBonus);
+		perfectText.text = "+ " + perfectBonus;
+		perfectText.color = perfectColor;
+		HitCount = 0;
+		//while (perfectText.color.a >0) 
+		//{
+			perfectText.color = Color.Lerp (perfectColor, fadeColor, 0.3f);
+		//}
 	}
 }

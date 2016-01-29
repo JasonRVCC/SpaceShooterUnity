@@ -6,6 +6,7 @@ public class DestroyByContact : MonoBehaviour
 	public GameObject explosion;
 	public GameObject playerExplosion;
 	public int scoreValue;
+	public int perfectBonus;
 	private GameController gameController;
 
 	void Start()
@@ -37,6 +38,11 @@ public class DestroyByContact : MonoBehaviour
 		if (other.tag == "Bolt") 
 		{
 			gameController.AddScore (scoreValue);
+			gameController.HitCount += 1;
+			if (gameController.HitCount == gameController.hazardCount)
+			{
+				gameController.PerfectBonusScored();
+			}
 		}
 		Destroy(other.gameObject);
 		Destroy (gameObject); 

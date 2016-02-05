@@ -14,14 +14,14 @@ public class GameController : MonoBehaviour
 	public GUIText scoreText;
 	public GUIText restartText;
 	public GUIText gameOverText;
-	public GUIText perfectText;
+	//public GUIText perfectText;
 
 	private bool gameOver;
 	private bool restart;
 	private int score;
 	private int hitCount;
-	private Color perfectColor;
-	private Color fadeColor;
+	//private Color perfectColor;
+	//private Color fadeColor;
 
 	void Start ()
 	{
@@ -29,11 +29,11 @@ public class GameController : MonoBehaviour
 		restart = false;
 		restartText.text = "";
 		gameOverText.text = "";
-		perfectText.text = "";
+		//perfectText.text = "";
 		score = 0;
 		hitCount = 0;
-		perfectColor = perfectText.color;
-		fadeColor = perfectColor - new Color(0, 0, 0, 1.0f);
+		//perfectColor = perfectText.color;
+		//fadeColor = perfectColor - new Color(0, 0, 0, 1.0f);
 		UpdateScore ();
 		StartCoroutine (SpawnWaves());
 	}
@@ -102,12 +102,12 @@ public class GameController : MonoBehaviour
 	public void PerfectBonusScored ()
 	{
 		AddScore(perfectBonus);
-		perfectText.text = "+ " + perfectBonus;
-		perfectText.color = perfectColor;
+		//perfectText.text = "+ " + perfectBonus;
+		//perfectText.color = perfectColor;
 		HitCount = 0;
 		//while (perfectText.color.a >0) 
 		//{
-			perfectText.color = Color.Lerp (perfectColor, fadeColor, 0.3f);
+			//perfectText.color = Color.Lerp (perfectColor, fadeColor, 0.3f);
 		//}
 	}
 }
